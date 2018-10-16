@@ -7,4 +7,22 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'mintaxTester';
+  heroes:string[] = ['PK','MK','SK']
+  recentlyAddedHero: String;
+  amount:number = 100;
+  ngModelamount:number = 999;
+
+  submitValue(input) {
+    let inputValue: string = input.value;
+    this.heroes.push(inputValue)
+    this.recentlyAddedHero = inputValue.toUpperCase();
+  }
+
+  handleEvent(event) {
+    this.amount = event.target.value;
+  }
+
+  UpdateAmount(value) {
+    this.ngModelamount = value;
+  }
 }

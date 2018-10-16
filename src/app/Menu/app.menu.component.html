@@ -1,0 +1,109 @@
+<h3>This is Menu Component</h3>
+
+<!--<table border="5">
+    <thead>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th></th>
+    </thead>
+    <tbody>
+        
+        <tr *ngFor="let menuItem of menuItems">
+            <td>{{menuItem.name}}</td>
+            <td>{{menuItem.description}}</td>
+            <td>{{menuItem.price}}</td>
+            <td><button class="btn btn-success">Add</button></td>
+        </tr>
+
+    </tbody>
+
+</table>-->
+<!--<table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+          </tr>
+        </thead>
+        <tbody>
+            <div *ngFor="let menuItem of menuItems">
+                <menu-item [menuItemValue] = "menuItem">
+                    <tr>
+                        <td>{{menuItemValue.name}}</td>
+                        <td>{{menuItemValue.description}}</td>
+                        <td>{{menuItemValue.price}}</td>
+                        <td><button class="btn btn-success">Add</button></td>
+                    </tr>
+                </menu-item>
+            </div>
+        </tbody>
+      </table>-->
+
+
+
+<!--<button [attr.aria-label]="actionName">{{actionName}} with Aria</button>-->
+
+<button class="btn btn-primary float-right" >Cart ({{dishAddedToCardCount}})</button>
+
+<br>
+<br>
+<br>
+
+Item Added to Cart : <menu-cart [cartValue] = "dishAddedToCardCount"></menu-cart>
+
+<ul class="list-group" *ngFor="let menuItem of menuItems">
+
+    <li class="list-group-item" style="align-content:flex-end">
+            Price : {{menuItem.name}}<br/>
+            <!--Price : {{item.price | discountPipe : 0 | currency:'USD'}} <br/>-->
+            Price : {{menuItem.price}}<br/>
+            <menu-item [menuItemValue] = "menuItem" (onMenuItemAdd) = "onAddingAnItem($event)" (onPriceUpdate)="UpdatePrice($event)"></menu-item>
+    </li>  
+</ul>
+
+<br>
+<button class="btn btn-success float-right"  (click) = "showOrHideTheNewMenuItemPanel()">Add New Item</button>
+<br>
+<hr>
+<div *ngIf="showNewMenuItemPanel">
+        <br>
+<button class="btn btn-danger float-right" (click) = "showOrHideTheNewMenuItemPanel()">Hide</button>
+<form>
+    <div class="form-group row">
+        <label for="name" class="col-sm-2 col-form-label">Name</label>
+        <div class="col-sm-10">
+            <input type="text"  class="form-control" id="staticEmail" placeholder="Name" #itemName>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+        <div class="col-sm-10">
+        <input type="text" class="form-control" id="desc" placeholder="Description" #itemDesc>>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="price" class="col-sm-2 col-form-label">Price</label>
+        <div class="col-sm-10">
+        <input type="number" class="form-control" id="price" placeholder="9.99" #itemPrice>>
+        </div>
+    </div>
+    <button class="btn btn-success float-right"  (click) = "addnewMenuItem(itemName.value,itemDesc.value,itemPrice.value)">Add</button>
+</form>
+</div>
+
+
+<!--<input #box (keyup)="0">
+    <p>{{box.value}}</p>-->
+
+
+    <!--<input #box
+      (keyup.enter)="update(box.value)"
+      (blur)="update(box.value)">
+
+    <p>{{value}}</p>-->
+
+
+
