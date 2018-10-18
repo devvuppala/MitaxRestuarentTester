@@ -4,6 +4,8 @@ import {FormsModule} from '@angular/forms'
 
 import { AppComponent } from './app.component';
 import { MenuModule } from './Menu/app.menu.module';
+import { TempModule } from './Temp/app.test.module';
+import { AdvertisementModule } from './advertisement/app.advertisement.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +14,9 @@ import { MenuModule } from './Menu/app.menu.module';
   imports: [
     BrowserModule,
     FormsModule,
-    MenuModule
+    MenuModule,
+    TempModule,
+    AdvertisementModule
   ],
   providers: [],
   bootstrap: [AppComponent]

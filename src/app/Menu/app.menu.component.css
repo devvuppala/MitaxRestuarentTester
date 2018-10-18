@@ -1,3 +1,10 @@
-h3 {
-    color: green;
-}
+@import "../app.component.css";
+
+:host {
+    display: block;
+    border: 1px solid black;
+  }
+
+  :host(.active) {
+    border-width: 3px;
+  }

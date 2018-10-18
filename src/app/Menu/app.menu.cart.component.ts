@@ -4,8 +4,13 @@ import { MenuItem } from './app.menu.model';
 @Component({
   selector: 'menu-cart',
   template:`
-
-    Cart : {{cartValue}}
+   <div class="float-right">
+    <button class="btn btn-primary float-right" >Cart ({{cartValue}})</button><br>
+    <div *ngIf = "updatedPrice" class="alert alert-success" role="alert">
+      Price Updated to : {{totalPrice}}
+    </div>
+  
+  </div>
   
   `
 })
@@ -14,6 +19,8 @@ import { MenuItem } from './app.menu.model';
 export class MenuCartItemComponent implements OnChanges  {
 
     @Input() cartValue: number;
+    @Input() totalPrice: number = 0.00;
+    updatedPrice:boolean = false;
 
   //   constructor() {
   //     console.log("Constructor");
@@ -34,5 +41,16 @@ export class MenuCartItemComponent implements OnChanges  {
   ngOnDestroy() {
        console.log("MenuCartItemComponent ngOnDestroy : ")
    }
+
+   showUpdatedPrice() {
+      this.updatedPrice = true;
+   }
     
+   applyCoupon(discount: number) {
+      console.log("Cart" + discount);
+      this.totalPrice = this.totalPrice * (discount /100);
+      return this.totalPrice;
+   }
+
+   
 }

@@ -46,21 +46,40 @@
 
 <!--<button [attr.aria-label]="actionName">{{actionName}} with Aria</button>-->
 
-<button class="btn btn-primary float-right" >Cart ({{dishAddedToCardCount}})</button>
+<!--<button class="btn btn-primary float-right" >Cart ({{dishAddedToCardCount}})</button>-->
+<menu-cart #menuCartTemRef [cartValue] = "dishAddedToCardCount" [totalPrice] = "totalPrice"></menu-cart>
 
 <br>
+<h3>Test</h3>
 <br>
+<div class="alert alert-success" role="alert">
+    <i style="color:green">Total:</i> <i style="color:red">$ {{menuCartTemRef.totalPrice | number : '1.2-2'}}</i>
+</div>
+
 <br>
+<div class="card">
+    <div class="card-header">
+        Coupons
+    </div>
+    <div class="card-body">
+            Enter Coupon : <input type="string" #copounValue> &nbsp;&nbsp;&nbsp;&nbsp; 
+            <button class="btn btn-danger" (click)="applyCoupon(copounValue.value)"> Apply </button>
+            <div *ngIf="invalidCopoun">
+                <br> <div class="alert alert-danger" role="alert">
+                        Invalid Coupon!!!!!
+                      </div>
+            </div>
+    </div>
+</div>
+<!--Item Added to Cart : <menu-cart [cartValue] = "dishAddedToCardCount"></menu-cart>-->
 
-Item Added to Cart : <menu-cart [cartValue] = "dishAddedToCardCount"></menu-cart>
-
-<ul class="list-group" *ngFor="let menuItem of menuItems">
-
+<ul class="list-group" *ngFor="let menuItem of menuItems; let i = index">
+{{indx}}
     <li class="list-group-item" style="align-content:flex-end">
-            Price : {{menuItem.name}}<br/>
-            <!--Price : {{item.price | discountPipe : 0 | currency:'USD'}} <br/>-->
-            Price : {{menuItem.price}}<br/>
-            <menu-item [menuItemValue] = "menuItem" (onMenuItemAdd) = "onAddingAnItem($event)" (onPriceUpdate)="UpdatePrice($event)"></menu-item>
+            <menu-item #menuItemTempRef [menuItemValue] = "menuItem"  [currentDate] = "currentDate" (onMenuItemAdd) = "onAddingAnItem($event)" (onPriceUpdate)="UpdatePrice($event)">
+                No - {{i}}  : 
+
+            </menu-item>
     </li>  
 </ul>
 

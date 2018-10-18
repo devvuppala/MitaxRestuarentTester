@@ -1,5 +1,6 @@
-import { Component, OnChanges, OnInit,  SimpleChanges, Input, OnDestroy, DoCheck, AfterViewInit, AfterContentInit, AfterViewChecked, AfterContentChecked } from '@angular/core';
+import { Component, OnChanges, OnInit,  SimpleChanges, Input, OnDestroy, DoCheck, AfterViewInit, AfterContentInit, AfterViewChecked, AfterContentChecked, ViewChild } from '@angular/core';
 import { MenuItem } from './app.menu.model';
+import { MenuCartItemComponent } from './app.menu.cart.component';
 
 @Component({
   selector: 'menu-root',
@@ -28,14 +29,20 @@ export class MenuComponent {
     dishAddedToCardCount: number = 0;
     changesTest: number = 5;
     showNewMenuItemPanel:boolean = false;
+    currentDate:Date = new Date();
+    invalidCopoun: boolean = false;    
+    totalPrice: number = 0;
 
     showOrHideTheNewMenuItemPanel() {
         this.showNewMenuItemPanel = !this.showNewMenuItemPanel;
     }
+
+    @ViewChild(MenuCartItemComponent)  private cartComponent : MenuCartItemComponent;
    //
 
     onAddingAnItem(item: MenuItem) {
         this.dishAddedToCardCount ++ ;
+        this.totalPrice = this.totalPrice + item.price;
     }
 
     addnewMenuItem(name:string,description:string,price:number) {
@@ -58,4 +65,19 @@ export class MenuComponent {
         })
     }
       //update(value: string) { this.value = value; }
+
+      applyCoupon(discount: string) {
+        console.log(discount);
+        if(discount === 'D50') {
+            this.totalPrice = this.cartComponent.applyCoupon(50);
+        } else if(discount == 'D30') {
+            this.totalPrice = this.cartComponent.applyCoupon(30);
+        } else {
+          this.totalPrice = this.totalPrice
+          this.invalidCopoun = true;
+        }
+      }
+      
+
+
 }

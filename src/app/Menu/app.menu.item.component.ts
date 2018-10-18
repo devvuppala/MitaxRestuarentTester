@@ -4,10 +4,14 @@ import { MenuItem } from './app.menu.model';
 @Component({
   selector: 'menu-item',
   template:`
-    
+  <ng-content></ng-content>
+  Price : {{menuItemValue.name}}<br/>
+  <!--Price : {{item.price | discountPipe : 0 | currency:'USD'}} <br/>-->
+  CurrentDate is :  {{currentDate | date : 'MM-dd-yyyy hh:mm:ss: a'}}<br>
+  Price : {{menuItemValue.price}}<br/>
   <input type="number" [(ngModel)] = "menuItemValue.price" #price>
   <button class="btn btn-success" (click) = "UpdatePrice(menuItemValue,price)" >Emit</button>
-  <br>
+  <br>  
   <button class="btn btn-success" (click) = "addThisItem(menuItemValue)" >Add To Cart</button>
  
   
@@ -26,6 +30,17 @@ export class MenuItemComponent implements OnChanges {
     @Input() menuItemValue: MenuItem;
     @Output() onMenuItemAdd : EventEmitter<MenuItem> = new EventEmitter();
     @Output() onPriceUpdate : EventEmitter<MenuItem> = new EventEmitter();
+    private _currentDate;
+
+    @Input()
+    set currentDate(currentDate: Date) {
+      this._currentDate = currentDate;
+    }
+
+    get currentDate(): Date {
+      return this._currentDate;
+    }
+
 
     addThisItem(itemToBeAdded: MenuItem) {
       this.onMenuItemAdd.emit(itemToBeAdded);
@@ -57,5 +72,7 @@ export class MenuItemComponent implements OnChanges {
     item.price = updatedPrice;
     this.onPriceUpdate.emit(item);
   }
+
+  
     
 }
