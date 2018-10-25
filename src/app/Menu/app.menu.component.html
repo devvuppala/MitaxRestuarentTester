@@ -48,7 +48,8 @@
 
 <!--<button class="btn btn-primary float-right" >Cart ({{dishAddedToCardCount}})</button>-->
 <menu-cart #menuCartTemRef [cartValue] = "dishAddedToCardCount" [totalPrice] = "totalPrice"></menu-cart>
-
+<label>Search Menu: </label>
+<input type="text" [(ngModel)] = "menuSearchText">
 <br>
 <h3>Test</h3>
 <br>
@@ -63,17 +64,28 @@
     </div>
     <div class="card-body">
             Enter Coupon : <input type="string" #copounValue> &nbsp;&nbsp;&nbsp;&nbsp; 
-            <button class="btn btn-danger" (click)="applyCoupon(copounValue.value)"> Apply </button>
+                           <input type="number"  price-directive placeholder="9.99"  #priceHere
+                                    [validationFailedColor] = "'5px solid green'" [validationPassedColor] = "'5px solid red'"
+                           > 
+                           
+            <button class="btn btn-danger" (click)="applyCoupon(copounValue.value)"> Apply ({{invalidCopoun}})</button>
             <div *ngIf="invalidCopoun">
                 <br> <div class="alert alert-danger" role="alert">
                         Invalid Coupon!!!!!
                       </div>
             </div>
+            <div *ngNotIf="invalidCopoun">
+                <br> <div class="alert alert-success" role="alert">
+                        Valid Coupon!!!
+                        </div>
+
+            </div>
+            {{priceHere.value | myCurrencyConvertor : 'IND' : 'us'}}
     </div>
 </div>
 <!--Item Added to Cart : <menu-cart [cartValue] = "dishAddedToCardCount"></menu-cart>-->
 
-<ul class="list-group" *ngFor="let menuItem of menuItems; let i = index">
+<ul class="list-group" *ngFor="let menuItem of menuItems | filterPipe : menuSearchText : 'name'; let i = index">
 {{indx}}
     <li class="list-group-item" style="align-content:flex-end">
             <menu-item #menuItemTempRef [menuItemValue] = "menuItem"  [currentDate] = "currentDate" (onMenuItemAdd) = "onAddingAnItem($event)" (onPriceUpdate)="UpdatePrice($event)">
@@ -98,7 +110,7 @@
         </div>
     </div>
     <div class="form-group row">
-        <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+        <label for="inputPassword" class="col-sm-2 col-form-label">Description</label>
         <div class="col-sm-10">
         <input type="text" class="form-control" id="desc" placeholder="Description" #itemDesc>>
         </div>
@@ -106,7 +118,7 @@
     <div class="form-group row">
         <label for="price" class="col-sm-2 col-form-label">Price</label>
         <div class="col-sm-10">
-        <input type="number" class="form-control" id="price" placeholder="9.99" #itemPrice>>
+        <input type="number" class="form-control" id="price" price-directive placeholder="9.99" #itemPrice>>
         </div>
     </div>
     <button class="btn btn-success float-right"  (click) = "addnewMenuItem(itemName.value,itemDesc.value,itemPrice.value)">Add</button>

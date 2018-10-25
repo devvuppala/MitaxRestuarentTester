@@ -1,0 +1,17 @@
+<h3>User Module</h3>
+
+<div *ngIf="errorRetrevingUsers">
+<div class="alert alert-danger" role="alert">
+    Error while retreving the Users
+    {{errorMessage}}
+</div>
+
+</div>
+<ng-container>
+<div *ngFor="let user of users">
+    <h3>{{user.username}}</h3>  
+</div>
+</ng-container>
+
+<button class="btn btn-success" (click)= "addUser()">Add User</button>
+<button class="btn btn-danger" (click)= "deleteUser()">Delete User</button>

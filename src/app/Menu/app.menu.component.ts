@@ -1,29 +1,18 @@
-import { Component, OnChanges, OnInit,  SimpleChanges, Input, OnDestroy, DoCheck, AfterViewInit, AfterContentInit, AfterViewChecked, AfterContentChecked, ViewChild } from '@angular/core';
+import { Component, OnChanges, OnInit,  SimpleChanges, Input, OnDestroy, DoCheck, AfterViewInit, AfterContentInit, AfterViewChecked, AfterContentChecked, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { MenuItem } from './app.menu.model';
 import { MenuCartItemComponent } from './app.menu.cart.component';
+import { MenuService } from './app.menu.service';
 
 @Component({
   selector: 'menu-root',
   templateUrl: './app.menu.component.html',
-  styleUrls: ['./app.menu.component.css']
+  styleUrls: ['./app.menu.component.css'],
+  changeDetection: ChangeDetectionStrategy.Default
 })
 
 
-export class MenuComponent {
+export class MenuComponent implements OnInit{
 
-    menuItems: MenuItem[] = [{
-        name:'PBS',
-        description:'PBS',
-        price:9.99
-    },{
-        name:'CBS',
-        description:'CBS',
-        price:15.99
-    },{
-        name:'Biryani',
-        description:'Biryani',
-        price:19.99
-    }]
   
     actionName:string = "Success"
     dishAddedToCardCount: number = 0;
@@ -32,7 +21,17 @@ export class MenuComponent {
     currentDate:Date = new Date();
     invalidCopoun: boolean = false;    
     totalPrice: number = 0;
+    menuSearchText: string = '';
+    
+    menuItems: MenuItem[] = [];
+    constructor(private menuService: MenuService) {
 
+    }
+    ngOnInit() {
+         this.menuService.getMenuItems().subscribe((menus: MenuItem[]) => {
+            this.menuItems = menus;
+         })
+    }
     showOrHideTheNewMenuItemPanel() {
         this.showNewMenuItemPanel = !this.showNewMenuItemPanel;
     }
@@ -68,6 +67,7 @@ export class MenuComponent {
 
       applyCoupon(discount: string) {
         console.log(discount);
+        this.invalidCopoun = false;
         if(discount === 'D50') {
             this.totalPrice = this.cartComponent.applyCoupon(50);
         } else if(discount == 'D30') {

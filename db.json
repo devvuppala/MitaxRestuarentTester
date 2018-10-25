@@ -1,0 +1,48 @@
+{
+
+    "menus" : [{
+        "name":"Panner Butter Masala",
+        "description":"Panner Butter Masala made of Cheese cubes and Butter",
+        "price":9.99
+    },{
+        "name":"Chicken Butter Masala",
+        "description":"Chicken and Butter",
+        "price":15.99
+    },{
+        "name":"Chicken Biryani",
+        "description":"Biryani",
+        "price":19.99
+    },{
+        "name":"Chicken Biryani",
+        "description":"Biryani",
+        "price":19.99
+    }] ,
+
+
+    "books": [{
+        "name":"Head First Java",
+        "author": "Kathy Sierra, Bert Bates",
+        "price" : 19.99,
+        "isbn": 9780596009205,
+        "imageSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5F9UH4aiVmMAKoRp-YJPVLQSfXp9vakL0gjpWjFYplodjw8e0"
+    }, {
+        "name":"Outliers",
+        "author": "Malcolm Gladwell",
+        "price" : 199.99,
+        "isbn": 9780784839010,
+        "imageSrc": "https://millmentor.com/wp-content/uploads/2017/04/3d-HBOOK006-13.png"
+    }, {
+        "name":"A Monk who sold his Ferrari",
+        "author": "Robin S.Sharma",
+        "price" : 99.99,
+        "isbn": 9788179924945,
+        "imageSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCZ5oEWL743yHaXxwaM5eocX8mcRQQAxCi1StUHdhg5h_pYB3FFQ"
+    }, {
+        "name":"Angular Router",
+        "author": "Victor Savkin",
+        "price" : 39.99,
+        "isbn": 9788179924953,
+        "imageSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFWvbvMjCkcP7U8F5vCXzb4mcD3pm9ZXRwjD2KIP-Ub29Fqon6pQ"
+    }]
+
+}
