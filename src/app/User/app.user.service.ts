@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders, HttpInterceptor, HttpHandler, HttpEvent , HttpRequest, HttpErrorResponse} from "@angular/common/http";
 import { Observable } from "rxjs";
-import { catchError, retry, map, tap , last} from 'rxjs/operators';
+import { catchError, retry, map, tap , last, debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import { User } from "./app.user.model";
 import { HandleError, HttpErrorHandler } from "../app.error.handler";
 
@@ -42,5 +42,10 @@ export class UserService {
 
     updateUser(user: User) : Observable<User> { 
         return this.http.put<User>(user_api + '/user/'+user.id,httpOptions);
+    }
+
+    searchUserByFName(fname:any) : Observable<User[]> {
+        console.log("########Inside Service : " + fname)
+        return this.http.get<User[]>(user_api + "/user");
     }
 }

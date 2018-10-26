@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from './app.user.model';
 import { UserService } from './app.user.service';
+import { Subject, Observable } from 'rxjs';
+import { debounceTime, throttleTime, distinctUntilChanged, switchMap, map } from 'rxjs/operators';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'user-root',
@@ -13,6 +16,20 @@ export class UserRootComponent implements OnInit{
     users: User[] = []
     errorRetrevingUsers: boolean = false;
     errorMessage: string ;
+    userSearchInput: Observable<string> = new Observable<string>();
+    customInput : Subject<string> = new Subject();
+    enableAddUser:boolean = false;
+    newUser: User = {
+        username:'',
+        password: '',
+        firstName: '',
+        lastName: '',
+        phone: '',
+        email: '',
+        role: '',
+        dateOfBirth: new Date('01-24-1987')
+    }
+    //private userSearchInput = new Subject<string>();
 
     constructor(private userService : UserService) {
         //Inject
@@ -30,8 +47,13 @@ export class UserRootComponent implements OnInit{
         })
     }
 
-    addUser() {
-        let user:User = {
+    enableODisableAddUser() {
+        this.enableAddUser = !this.enableAddUser;
+    }
+    addUser(form: NgForm) {
+        console.log(form)
+        console.log(this.newUser)
+        /*let user:User = {
             username:'Dev',
             password: 'DevV',
             firstName: 'Dev',
@@ -50,7 +72,7 @@ export class UserRootComponent implements OnInit{
                 console.log(error);
                 this.errorMessage = 'Status:' + error.status + 'Error Message : ' + error.error;
             })
-        })
+        })*/
     }
 
     deleteUser() {
@@ -75,6 +97,34 @@ export class UserRootComponent implements OnInit{
                 this.errorMessage = 'Status:' + error.status + 'Error Message : ' + error.error;
             })
         })
+    }
+
+    updateUserResult() {
+        console.log(typeof this.userSearchInput);
+        // /this.userService.searchUserByFName(this.userSearchInput).pipe(throttleTime(5000), debounceTime(10000)).subscribe();
+        // this.userSearchInput.pipe(debounceTime(10000)).subscribe(() => {
+        //     this.userService.searchUserByFName(this.userSearchInput);
+        // });
+
+        this.userSearchInput.pipe(
+            debounceTime(500),
+            distinctUntilChanged(),
+            switchMap(packageName =>
+              this.userService.searchUserByFName(packageName))
+          );
+    }
+
+    inputValueChanged(event){
+        console.log(event);
+         this.customInput.next(event);
+         this.customInput.pipe(map(event => event) , debounceTime(1000),distinctUntilChanged()).subscribe(value =>{
+            //value will have your input
+            let date : Date = new Date('MM-dd-yyyy hh:mm:ss')
+            console.log(date + ' ::::: ' + value);
+            this.userService.searchUserByFName(value).subscribe((users: User[]) => {
+                console.log(users != null ? users.length : 0);
+            });
+         });
     }
 
     

@@ -6,11 +6,12 @@ import {HttpClientModule, HTTP_INTERCEPTORS, HttpClientXsrfModule} from '@angula
 import { UserRootComponent } from './app.user.root.component';
 import { UserService } from './app.user.service';
 import { TokenInterceptor } from './app.user.service.interceptor';
+import { UserPasswordValidator } from './app.user.password.validation';
 
 
 @NgModule({
   declarations: [
-    UserRootComponent
+    UserRootComponent, UserPasswordValidator
   ],
   imports: [
     BrowserModule,
