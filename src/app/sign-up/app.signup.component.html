@@ -1,0 +1,99 @@
+<!--<label>
+    Name:
+<input type="text" [formControl]="name">
+</label>
+
+<button (click)="updateName()" class="btn btn-success">Update</button>-->
+
+<form [formGroup]="regForm" (ngSubmit) = "OnRegFormSubmit()">
+  
+    <label>
+        User Name:
+        <input type="text" formControlName="username">
+        {{regForm.get('username').value}}
+        <div *ngIf="regForm.get('username').invalid && (regForm.get('username').dirty || regForm.get('username').touched)"
+            class="alert alert-danger">
+
+        <div *ngIf="regForm.get('username').errors.required">
+            Name is required.
+        </div>
+        <div *ngIf="regForm.get('username').errors.minlength">
+            Name must be at least 4 characters long.
+        </div>
+        <div *ngIf="regForm.get('username').errors.forbiddenName">
+            Name cannot be Bob.
+        </div> <div *ngIf="regForm.get('username').errors.emailNotAvailable">
+                Username not available
+            </div>
+        </div>
+    </label>
+    <br>
+    <label>
+        Password:
+        <input type="password" formControlName="password">
+    </label>
+    <br>
+    <label>
+        Email ID:
+        <input type="text" formControlName="emailID">
+        <div *ngIf="regForm.get('emailID').invalid && (regForm.get('emailID').dirty || regForm.get('emailID').touched)"
+            class="alert alert-danger">
+
+        <div *ngIf="regForm.get('emailID').errors.required">
+            Name is required.
+        </div>
+        <div *ngIf="regForm.get('emailID').errors.email">
+            Not a valid email ID
+        </div>
+        <div *ngIf="regForm.get('username').errors.emailNotAvailable">
+            Email ID not available
+        </div>
+        </div>
+    </label>
+    <br>
+    <div formGroupName="address">
+            <h3>Address</h3>
+          
+            <label>
+              Street:
+              <input type="text" formControlName="street">
+            </label>
+            <br>
+            <label>
+              City:
+              <input type="text" formControlName="city">
+            </label>
+            <br>
+            <label>
+              State:
+              <input type="text" formControlName="state">
+            </label>
+            <br>
+            <label>
+              Zip Code:
+              <input type="text" formControlName="zip">
+            </label>
+            <br>
+          </div>
+          <br>
+          <div formArrayName="hobbies">
+                <h3>Hobbies</h3> <button (click)="addHobbies()">Add Alias</button>
+              
+                <div *ngFor="let hobb of hobbies.controls; let i=index">
+                  <!-- The repeated alias template -->
+                  <label>
+                    Alias:
+                    <input type="text" [formControlName]="i">
+                  </label>
+                </div>
+              </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+    <br>
+    <button (click)="updateName()" class="btn btn-primary">Update</button>
+<br>
+    <!--{{regForm.value | json}}
+    Status : {{ regForm.status }}-->
+
+    {{regForm.get('emailID').errors | json}}
+    {{regForm.errors | json}}
+</form>

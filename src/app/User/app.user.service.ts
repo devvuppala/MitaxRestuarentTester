@@ -48,4 +48,8 @@ export class UserService {
         console.log("########Inside Service : " + fname)
         return this.http.get<User[]>(user_api + "/user");
     }
+
+    isUserAvailable(name:string) : Observable<Boolean> {
+        return this.http.get<Boolean>(user_api + "/user/" + name + "/username");
+    }
 }

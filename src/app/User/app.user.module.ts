@@ -7,11 +7,13 @@ import { UserRootComponent } from './app.user.root.component';
 import { UserService } from './app.user.service';
 import { TokenInterceptor } from './app.user.service.interceptor';
 import { UserPasswordValidator } from './app.user.password.validation';
+import { UsernameValidator } from './app.user.username.validation';
+import { UniqueEmailAsyncValidation } from './app.email.asyn.validator';
 
 
 @NgModule({
   declarations: [
-    UserRootComponent, UserPasswordValidator
+    UserRootComponent, UserPasswordValidator, UsernameValidator, UniqueEmailAsyncValidation
   ],
   imports: [
     BrowserModule,

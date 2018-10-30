@@ -12,6 +12,7 @@ import { BookModule } from './Books/app.book.module';
 import { UserModule } from './User/app.user.module';
 import { ErrorService } from './app.error.service';
 import { HttpErrorHandler } from './app.error.handler';
+import { SignUpModule } from './sign-up/app.signup.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { HttpErrorHandler } from './app.error.handler';
     AdvertisementModule,
     BookModule,
     UserModule,
+    SignUpModule
   ],
   providers: [
     ErrorService,
