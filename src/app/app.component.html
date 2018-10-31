@@ -31,6 +31,44 @@
 <!--<menu-root></menu-root>-->
 <!--<book-root></book-root>-->
 <!--<user-root></user-root>-->
-<signup-root></signup-root>
+<!--<signup-root></signup-root>-->
 
 <!--test-parent></test-parent>-->
+
+
+<div class="card text-center">
+    <div class="card-header"  *ngIf="isLoggedIn()">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/" routerLinkActive="active" >Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="menus" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Menus</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Pricing</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled" href="#" >Disabled</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="float-right">{{getLoggedInUser()}}</div>
+            <a class="nav-link" href="#" style="padding-left: 15px;" (click)="logout()">logout</a>
+          </nav>
+    </div>
+    <div class="card-body">
+      <div class="container" style="align-self: initial" style="height:80%">
+          <router-outlet></router-outlet>
+      </div>
+    </div>
+    <div class="card-footer text-muted card text-white float-bottom">
+      <small>@copyright</small> Mintex app 
+    </div>

@@ -17,31 +17,24 @@ import { SignUpModule } from './sign-up/app.signup.module';
 import { LoginModule } from './login/app.login.module';
 import { LoginComponent } from './login/app.login.component';
 import { SignUpRootComponent } from './sign-up/app.signup.component';
-import { AppRoutingModule } from './app-routing.module';
+import { MenuComponent } from './Menu/app.menu.component';
 import { PageNotFoundComponent } from './app.page-not-found-component';
 
+const routes : Routes = [
+  {path:'' , component:LoginComponent},
+  {path:'signup' , component:SignUpRootComponent},
+  {path:'menus' , component:MenuComponent},
+  {path:'menus/:id' , component:MenuComponent , data: { title: 'Heroes List' }},
+  {path:'**', component: PageNotFoundComponent}
+]
 
 @NgModule({
   declarations: [
-    AppComponent, PageNotFoundComponent
+    
   ],
   imports: [
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    RouterModule,
-    MenuModule,
-    TempModule,
-    AdvertisementModule,
-    BookModule,
-    UserModule,
-    SignUpModule,
-    LoginModule,
-    AppRoutingModule
+    RouterModule.forRoot(routes)
   ],
-  providers: [
-    ErrorService,
-    HttpErrorHandler],
-  bootstrap: [AppComponent]
+  providers: []
 })
-export class AppModule { }
+export class AppRoutingModule { }

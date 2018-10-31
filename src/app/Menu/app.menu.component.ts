@@ -2,6 +2,7 @@ import { Component, OnChanges, OnInit,  SimpleChanges, Input, OnDestroy, DoCheck
 import { MenuItem } from './app.menu.model';
 import { MenuCartItemComponent } from './app.menu.cart.component';
 import { MenuService } from './app.menu.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'menu-root',
@@ -24,13 +25,20 @@ export class MenuComponent implements OnInit{
     menuSearchText: string = '';
     
     menuItems: MenuItem[] = [];
-    constructor(private menuService: MenuService) {
+    constructor(private menuService: MenuService,
+                private activateRoute: ActivatedRoute
+            ) {
 
     }
     ngOnInit() {
          this.menuService.getMenuItems().subscribe((menus: MenuItem[]) => {
             this.menuItems = menus;
          })
+        
+         console.log("**************************:" + this.activateRoute.snapshot.params['id']);
+         console.log("**************************:" + this.activateRoute.snapshot.queryParams['name']);
+         console.log("**************************:" + this.activateRoute.snapshot.data['title']);
+         console.log("**************************:" + this.activateRoute.snapshot.pathFromRoot);
     }
     showOrHideTheNewMenuItemPanel() {
         this.showNewMenuItemPanel = !this.showNewMenuItemPanel;

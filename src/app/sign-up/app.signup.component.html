@@ -10,6 +10,10 @@
     <label>
         User Name:
         <input type="text" formControlName="username">
+        <div class="progress" *ngIf="isUsernameStatusPending">
+            <div class="progress-bar progress-bar-striped bg-success" 
+                role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">Loading.....</div>
+        </div>
         {{regForm.get('username').value}}
         <div *ngIf="regForm.get('username').invalid && (regForm.get('username').dirty || regForm.get('username').touched)"
             class="alert alert-danger">
@@ -22,7 +26,8 @@
         </div>
         <div *ngIf="regForm.get('username').errors.forbiddenName">
             Name cannot be Bob.
-        </div> <div *ngIf="regForm.get('username').errors.emailNotAvailable">
+        </div> 
+        <div *ngIf="regForm.get('username').errors.emailNotAvailable">
                 Username not available
             </div>
         </div>
@@ -96,4 +101,5 @@
 
     {{regForm.get('emailID').errors | json}}
     {{regForm.errors | json}}
+    {{regForm.get('username').status}}
 </form>

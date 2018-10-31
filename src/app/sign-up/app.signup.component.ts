@@ -68,6 +68,8 @@ export class SignUpRootComponent implements OnInit {
     hobbies: new FormArray([new FormControl("Music"), new FormControl("Dance")])
   });
 
+  isUsernameStatusPending:boolean =  false;
+
  
   /*fbRegForm = this.formBuilder.group({
         username : [''],
@@ -101,6 +103,11 @@ export class SignUpRootComponent implements OnInit {
 
     this.regForm.statusChanges.subscribe(status => {
       console.log(status);
+      if(this.regForm.get('username'). status == "PENDING") {
+        this.isUsernameStatusPending = true;
+      } else {
+        this.isUsernameStatusPending = false;
+      }
     })
   }
 
@@ -171,7 +178,7 @@ export class SignUpRootComponent implements OnInit {
     console.log("Async : " + control.value);
     this.userService
       .isUserAvailable(control.value)
-      .subscribe((isAvailable: boolean) => {
+      .subscribe((isAvailable: User[]) => {
         return isAvailable;
       });
   }

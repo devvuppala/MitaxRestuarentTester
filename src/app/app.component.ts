@@ -25,4 +25,16 @@ export class AppComponent {
   UpdateAmount(value) {
     this.ngModelamount = value;
   }
+  
+  getLoggedInUser() {
+    return sessionStorage.getItem('loggedInName');
+  }
+
+  isLoggedIn() {
+    return sessionStorage.getItem('loggedInName') != null;
+  }
+
+  logout() {
+    sessionStorage.clear();
+  }
 }
