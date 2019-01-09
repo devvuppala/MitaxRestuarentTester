@@ -9,16 +9,23 @@ import { TokenInterceptor } from './app.user.service.interceptor';
 import { UserPasswordValidator } from './app.user.password.validation';
 import { UsernameValidator } from './app.user.username.validation';
 import { UniqueEmailAsyncValidation } from './app.email.asyn.validator';
+import { Routes, RouterModule } from '@angular/router';
+import { UserItemComponent } from './app.user-item.component';
 
+const userRoots: Routes = [
+  {path:'currentUser/:userID', component: UserItemComponent},
+  {path:'currentUser', component: UserItemComponent}
+]
 
 @NgModule({
   declarations: [
-    UserRootComponent, UserPasswordValidator, UsernameValidator, UniqueEmailAsyncValidation
+    UserRootComponent, UserPasswordValidator, UsernameValidator, UniqueEmailAsyncValidation, UserItemComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    RouterModule.forChild(userRoots),
     HttpClientXsrfModule.withOptions({
         cookieName: 'appSec',
         headerName: 'My-Xsrf-Header',

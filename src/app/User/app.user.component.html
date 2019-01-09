@@ -9,7 +9,9 @@
 </div>
 <ng-container>
 <div *ngFor="let user of users">
-    <h3>{{user.username}}</h3>  
+    <h3>{{user.username}}</h3> &nbsp;&nbsp;&nbsp;&nbsp;
+    <a  routerLink="/currentUser/{{user.id}}">View User</a>|
+    <a  routerLink="/currentUser?username={{user.username}}">View By Username</a>
 </div>
 </ng-container>
 

@@ -1,0 +1,13 @@
+<p>
+  tester works!
+</p>
+
+<div *ngIf="booksfound">
+  <h1>Books</h1>
+  <h3>{{books?.length}}</h3>
+</div>
+
+<div *ngIf="!booksfound">
+  <h1>Books</h1>
+  <h3>Books not found</h3>
+</div>

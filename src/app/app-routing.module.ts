@@ -19,11 +19,15 @@ import { LoginComponent } from './login/app.login.component';
 import { SignUpRootComponent } from './sign-up/app.signup.component';
 import { MenuComponent } from './Menu/app.menu.component';
 import { PageNotFoundComponent } from './app.page-not-found-component';
+import { UserRootComponent } from './User/app.user.root.component';
+import { TesterComponent } from './tester/tester.component';
 
 const routes : Routes = [
   {path:'' , component:LoginComponent},
   {path:'signup' , component:SignUpRootComponent},
   {path:'menus' , component:MenuComponent},
+  {path:'users' , component:UserRootComponent},
+  {path:'testBooks' , component:TesterComponent},
   {path:'menus/:id' , component:MenuComponent , data: { title: 'Heroes List' }},
   {path:'**', component: PageNotFoundComponent}
 ]
